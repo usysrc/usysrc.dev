@@ -8,11 +8,12 @@ source .env
 
 ftp ftp://$user:$password@$server <<END_SCRIPT
 prompt
+lcd ~/dev/html/usysrc.dev/dist/
 mput *.html
 lcd style
 cd style
 mput *
-lcd ../style
+lcd ../img
 cd ../img
 mput *
 exit
