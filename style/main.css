@@ -1,0 +1,28 @@
+.logo {
+    width: 200px;
+}
+
+a {
+    color: rgb(0,0,0);
+    text-decoration: none;
+}
+
+a:hover {
+    color: rgb(255,0,0);
+}
+
+nav>ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+main {
+    margin-top: 16px;
+}
+
+footer {
+    border-top: 1px solid;
+    padding-top: 16px;
+    margin-top: 16px;
+}
