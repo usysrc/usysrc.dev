@@ -1,4 +1,6 @@
 #!/bin/bash
+#
+# Assembly the website and its resources.
 
 rm -rf ./dist/*
 
