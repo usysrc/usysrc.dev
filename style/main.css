@@ -1,5 +1,7 @@
 .logo {
     width: 200px;
+    margin-left: 3rem;
+    margin-top: 3rem;
 }
 
 a {
@@ -8,6 +10,9 @@ a {
 
 a:hover {
     background-color: rgb(200,200,200);
+}
+nav {
+    margin-left: 3rem;
 }
 
 nav>ul {
@@ -20,12 +25,28 @@ main {
     margin-top: 16px;
 }
 
+#titleimage {
+    width: 900px;
+    height: 550px;
+    margin-left: 0;
+}
+
 footer {
     border-top: 1px solid;
     padding-top: 16px;
     margin-top: 16px;
+    margin-left: 3rem;
 }
 
 img {
     display: block;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+}
+
+#content {
+    margin-left: 3rem;
 }
