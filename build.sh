@@ -11,5 +11,5 @@ mogrify -strip ./dist/img/*.jpg
 cp -r style ./dist/
 
 for filename in ./pages/*.html; do
-    cat header.html $filename footer.html > ./dist/$(basename $filename)
+	cat header.html $filename footer.html > ./dist/$(basename $filename)
 done
