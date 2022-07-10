@@ -3,7 +3,7 @@ title: "code"
 layout: staticpage
 ---
 
-
+![code](/img/code.jpg)
 encoding thoughts in language
 
 see my code on github
