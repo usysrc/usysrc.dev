@@ -7,6 +7,31 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language><atom:link href="https://usysrc.dev/index.xml" rel="self" type="application/rss+xml" />
     <item>
+      <title>Games</title>
+      <link>https://usysrc.dev/games/</link>
+      <pubDate>Sun, 10 Jul 2022 13:41:13 +0200</pubDate>
+      
+      <guid>https://usysrc.dev/games/</guid>
+      <description>spelltop spelltop was created in 2021 and now my main banner for games.
+some projects can be found on spelltop.itch.io
+game development I love small languages and engines like lua, pico8 and love2d.
+ludum dare I completed a couple of small games in ludum dare.
+past aliases headchant, causa creations, redlock</description>
+    </item>
+    
+    <item>
+      <title>Music</title>
+      <link>https://usysrc.dev/music/</link>
+      <pubDate>Sun, 10 Jul 2022 13:40:56 +0200</pubDate>
+      
+      <guid>https://usysrc.dev/music/</guid>
+      <description>rdlk kraut and synthesizer dance music http://soundcloud.com/rdlk
+shoegaze vst I couldn&amp;rsquo;t find a plain reverse delay plugin. https://spelltop.itch.io/shoegaze-vst So I made one.
+Features:
+reverse delay, a staple of shoegaze feedback minimal interface no DRM sadly for Windows only orcish inn I made the soundtrack for orcish inn by steven colling.</description>
+    </item>
+    
+    <item>
       <title>code</title>
       <link>https://usysrc.dev/code/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>

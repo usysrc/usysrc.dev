@@ -1,7 +1,7 @@
 ---
 title: "Games"
 date: 2022-07-10T13:41:13+02:00
-draft: true
+layout: staticpage
 ---
 
 ![games](/img/game.jpg)

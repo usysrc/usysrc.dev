@@ -1,7 +1,7 @@
 ---
 title: "Music"
 date: 2022-07-10T13:40:56+02:00
-draft: true
+layout: staticpage
 ---
 
 ![music](/img/music.jpg)
@@ -21,7 +21,7 @@ Features:
 - no DRM
 - sadly for Windows only
 
-![vst](/img/vst.png)
+![vst](img/vst.png)
 
 # orcish inn
 I made the [soundtrack](https://headchant.bandcamp.com/releases) for orcish inn by steven colling.
