@@ -9,4 +9,4 @@ encoding thoughts in language
 see my code on github
 advent of code
 
-I participated in advent of code but never completed all 25.
+I joined [advent of code](github.com/usysrc/aoc) in 2019, 2020 and 2021.
