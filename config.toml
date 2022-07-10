@@ -1,0 +1,22 @@
+baseURL = 'https://usysrc.dev/'
+languageCode = 'en-us'
+title = 'usysrc.dev'
+theme = 'usysrcTheme'
+assetDir = "static"
+[menu]
+  [[menu.main]]
+    name = "code"
+    url = "/code/"
+    weight = 1
+  [[menu.main]]
+    name = "ops"
+    url = "/ops/"
+    weight = 2
+  [[menu.main]]
+    name = "music"
+    url = "/music/"
+    weight = 3
+  [[menu.main]]
+    name = "games"
+    url = "/games/"
+    weight = 4
