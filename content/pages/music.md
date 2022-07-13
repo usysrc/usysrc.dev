@@ -1,5 +1,5 @@
 ---
-title: "Music"
+title: "music"
 date: 2022-07-10T13:40:56+02:00
 layout: staticpage
 ---

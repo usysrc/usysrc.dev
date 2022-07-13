@@ -6,17 +6,17 @@ assetDir = "static"
 [menu]
   [[menu.main]]
     name = "code"
-    url = "/code/"
+    url = "/pages/code/"
     weight = 1
   [[menu.main]]
     name = "ops"
-    url = "/ops/"
+    url = "/pages/ops/"
     weight = 2
   [[menu.main]]
     name = "music"
-    url = "/music/"
+    url = "/pages/music/"
     weight = 3
   [[menu.main]]
     name = "games"
-    url = "/games/"
+    url = "/pages/games/"
     weight = 4

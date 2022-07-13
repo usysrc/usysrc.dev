@@ -1,5 +1,5 @@
 ---
-title: "Games"
+title: "games"
 date: 2022-07-10T13:41:13+02:00
 layout: staticpage
 ---
