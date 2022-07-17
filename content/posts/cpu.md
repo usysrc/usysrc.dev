@@ -2,11 +2,14 @@
 title: "A CPU in Lua"
 date: 2014-04-12T17:13:34+02:00
 ---
-This post was originally published on blog.headchant.com but was edited and moved here in 2022.
+
+# A CPU in Lua
+
+*This post was originally published on blog.headchant.com but was edited and moved here in 2022.*
 
 It might be interesting to implement a small register based VM in Lua. Lets start by considering the architecture of a register machine.
 
-# The NOP machine
+## The NOP machine
 
 If we look at how existing Register Machines are designed for example the  or the Lua VM itself, we see a few things:
 
@@ -26,11 +29,11 @@ local MEM = {}
 local PC = 0
 ```
 
-# The registers
+## The registers
 
-A data registers is a small storage cell defined by it’s name (address), wordlength and content. In the [DCPU-16 Spec](https://raw.githubusercontent.com/gatesphere/demi-16/master/docs/dcpu-specs/dcpu-1-7.txt), for example, the wordlength is 16 bit and there are 8 registers named A,B,C… and correspond to the values 0x00-0x07.
+A data registers is a small storage cell defined by it’s name (address), wordlength and content. In the [DCPU-16 Spec](https://raw.githubusercontent.com/gatesphere/demi-16/master/docs/dcpu-specs/dcpu-1-7.txt), for example, there are 8 registers named A,B,C… and correspond to the values 0x00-0x07 with a wordlength of 16bit.
 
-We use simple variables and init them with numbers to represent our registers:
+We use a simple table and init the fields to numbers that represent our registers:
 
 ```lua
 local registers = {
@@ -41,8 +44,9 @@ local registers = {
 }
 ```
 
-The registers table is used later to access the registers more elegantly.
-Opcodes and operands
+The `registers` table can be used to access each register by simple dot syntax: `register.A`.
+
+## Opcodes and operands
 
 Instructions might be represented as byte sequences in the memory and can be a instruction like NOP. It can also be a operand that is only meaningful in conjuction with a opcode like MOV A, c (move constant c into the register A).
 
@@ -55,7 +59,7 @@ local opcodes = {
 }
 ```
 
-# Fetch and Execute
+## Fetch and Execute
 
 We need to establish a cycle to read out the instruction and fetch the opcode.
 
@@ -66,6 +70,7 @@ PC = PC + 1
 ```
 
 Then read out the current instruction at the location of the program counter into our instruction register
+
 
 ```lua
 local IR = MEM[PC]
@@ -119,8 +124,9 @@ FDX()
 
 This will output something like: PC IR 1 0x00 2 0x00 3 0x00
 
-Great! Now our machine finally does…nothing.
-Fetch operands
+Great! Now our machine finally does... nothing.
+
+## Fetch operands
 
 In order to implement operands we need to introduce a new fetch function into our program:
 
@@ -162,16 +168,17 @@ local opcodes = {
     ["0x00"] = function() -- NOP
     end,
     ["0x01"] = function() -- MOV R, c
-        local A = operands[fetch()]
+        local R = operands[fetch()]
         local c = fetch()
-        registers[A] = tonumber(c)
+        registers[R] = tonumber(c)
     end
 }
 ```
 
-We change our testprogram to: MEM = { “0x00”, “0x01”, “0x00”, “0x01” “0x00” }
+We change our testprogram to: `MEM = { “0x00”, “0x01”, “0x00”, “0x01” “0x00” }`
 
 Our output then tells us that our A register is being filled with 1.
+
 ```
 PC  IR      A
 1   0x00    0
@@ -179,7 +186,7 @@ PC  IR      A
 5   0x00    0x01
 ```
 
-# JMP around
+## JMP around
 
 Just to show how to extend this, I added three more instructions: ADD, SUB, JMP and IFE. JMP sets the program counter to a specific address. IFE adds 3 to the PC if two registers are equal.
 
@@ -229,7 +236,7 @@ MEM = {
 
 Now we have a small loop that counts to 5 and then stops! Yeah!
 ```
-PC  IR  A   B
+PC  IR      A   B
 1   0x00    0   0   0
 4   0x01    0   5   0
 7   0x01    0   5   1
@@ -250,6 +257,6 @@ PC  IR  A   B
 17  0x00    5   5   1
 ```
 
-# Conclusion
+## Conclusion
 
 There is still a lot of room for experimentation: Write an assembler. Handle errors, add your own instructions and make small programs with them. Try to enforce the register sizes or maybe create "stack and add" subroutines. You could also try to create opcodes with different cycle length or implement a small pipeline (and then resolve stalls).
