@@ -3,7 +3,7 @@ title: "Tables in Pico8"
 date: 2016-07-16T16:50:31+02:00
 draft: false
 ---
-
+# Tables in Pico8
 ![](/images/tables.png)
 
 ## The Concatenation Trick
@@ -67,7 +67,7 @@ for entity in all(entities) do
 end
 ```
 
-This only works with all() and del() together! This is great for games where you have dynamic objects such as bullets, effects or timed events that are added and removed dynamically.
+This only works with all() and del()! This is great for games where you have objects such as bullets, effects or timed events that are added and removed dynamically.
 
 I hope that these two hints help you to get started with the awesome Pico-8 engine. For advanced users, other methods might be more efficient. I recommend reading the Pico-8 Docs or the PIL for more information.
 
