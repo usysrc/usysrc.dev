@@ -6,7 +6,9 @@ layout: staticpage
 ![mesh](/img/mesh.jpg)
 
 # operations
-I use docker, kubernetes and github for operations.
+
+I like git, docker, kubernetes for operations.
 
 # unix philosophy
-small composable thoughts, not chainsaws
+
+I enjoy minimalist and modular software following the [unix philosophy](https://en.wikipedia.org/wiki/Unix_philosophy).
