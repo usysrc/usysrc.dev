@@ -4,6 +4,9 @@ layout: staticpage
 ---
 
 ![code](/img/code.jpg)
+
+## Programming languages
+
 I really enjoy the following programming languages:
 
 - Lua
