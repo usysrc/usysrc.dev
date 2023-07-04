@@ -20,6 +20,7 @@ nav {
     text-align: center;
     margin-bottom: 1rem;
 }
+
 nav a {
     margin-left: 1rem;
     margin-right: 1rem;
@@ -40,11 +41,10 @@ footer {
     border-top: 1px solid;
     padding-top: 1rem;
     margin-top: 1rem;
-    margin-left: 3rem;
     margin-bottom: 1rem;
 }
 
-#content img {
+#content p img {
     display: block;
     max-width: 32rem;
 }
@@ -58,6 +58,19 @@ body {
 .highlight {
     display:inline-block;
 }
+
 .highlight pre{
     padding: 1rem;
+}
+
+.centerize {
+    text-align: center;
+}
+#content ul {
+    text-align: center;
+    padding: 0;
+
+}
+#content ul li {
+    list-style-type: none;
 }
