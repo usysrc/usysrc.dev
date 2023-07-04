@@ -1,8 +1,11 @@
 .logo {
-    width: 200px;
-    margin-left: 3rem;
     margin-top: 1rem;
     margin-bottom: 1rem;    
+    text-align: center;
+}
+
+.logo img {
+    width: 15rem;
 }
 
 a {
@@ -14,13 +17,12 @@ a:hover {
 }
 
 nav {
-    margin-left: 3rem;
+    text-align: center;
+    margin-bottom: 1rem;
 }
-
-nav>ul {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
+nav a {
+    margin-left: 1rem;
+    margin-right: 1rem;
 }
 
 main {
@@ -34,23 +36,23 @@ main {
 }
 
 footer {
+    text-align: center;
     border-top: 1px solid;
-    padding-top: 16px;
-    margin-top: 16px;
+    padding-top: 1rem;
+    margin-top: 1rem;
     margin-left: 3rem;
+    margin-bottom: 1rem;
 }
 
-img {
+#content img {
     display: block;
+    max-width: 32rem;
 }
 
 body {
-    margin: 0;
+    max-width: 500px;
+    margin: 0 auto;
     padding: 0;
-}
-
-#content {
-    margin-left: 3rem;
 }
 
 .highlight {

@@ -1,13 +1,12 @@
-<a href="/"><img class="logo" src="/img/logo.svg" /></a>
+<div class="logo">
+    <a href="/"><img class="logo" src="/img/logo.svg" /></a>
+</div>
 <div id="nav-border" class="container">
     <nav id="nav" class="nav justify-content-center">
-        <ul>
+        <p>
             {{ range where .Site.RegularPages "Section" "pages" }}
-
-            <li>
                 <a href="{{.Permalink}}">{{.Title}}</a>
-            </li>
             {{ end }}
-        </ul>
+        </p>
     </nav>
 </div>
