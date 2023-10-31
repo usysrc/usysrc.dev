@@ -9,7 +9,11 @@ layout: staticpage
 # rdlk
 
 kraut and synthesizer dance music
-[http://soundcloud.com/rdlk](http://soundcloud.com/rdlk)
+[https://rdlk.xyz](https://rdlk.xyz)
+
+# orcish inn
+
+I made the [soundtrack](https://headchant.bandcamp.com/releases) for orcish inn by steven colling.
 
 # shoegaze vst
 
@@ -25,6 +29,4 @@ Features:
 
 ![vst](img/vst.png)
 
-# orcish inn
 
-I made the [soundtrack](https://headchant.bandcamp.com/releases) for orcish inn by steven colling.
