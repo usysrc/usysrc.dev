@@ -14,7 +14,7 @@ some projects can be found on [spelltop.itch.io](https://spelltop.itch.io)
 
 # game development
 
-I love small languages and engines like lua, pico8 and love2d.
+I love small game engines and frameworks like tic80, pico8 and love2d.
 
 # ludum dare
 
@@ -22,4 +22,4 @@ I completed a couple of small games in <a href="https://ldjam.com/users/headchan
 
 # past aliases
 
-headchant, causa creations, redlock
+I made games under the name: headchant
