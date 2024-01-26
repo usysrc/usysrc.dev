@@ -1,6 +1,6 @@
 .logo {
     margin-top: 1rem;
-    margin-bottom: 1rem;    
+    margin-bottom: 1rem;
     text-align: center;
 }
 
@@ -9,11 +9,11 @@
 }
 
 a {
-    color: rgb(0,0,0);
+    color: rgb(0, 0, 0);
 }
 
 a:hover {
-    background-color: rgb(200,200,200);
+    background-color: rgb(200, 200, 200);
 }
 
 nav {
@@ -55,22 +55,20 @@ body {
     padding: 0;
 }
 
-.highlight {
-    display:inline-block;
-}
-
-.highlight pre{
-    padding: 1rem;
+.highlight pre {
+    padding: 0.5rem;
 }
 
 .centerize {
     text-align: center;
 }
+
 #content ul {
     text-align: center;
     padding: 0;
 
 }
+
 #content ul li {
     list-style-type: none;
 }
