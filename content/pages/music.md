@@ -27,6 +27,5 @@ Features:
 - no DRM
 - sadly for Windows only
 
-![vst](img/vst.png)
 
 
