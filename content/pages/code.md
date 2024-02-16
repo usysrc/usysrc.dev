@@ -7,15 +7,15 @@ layout: staticpage
 
 # programming languages
 
-I really love using the following programming languages:
+I currently enjoy using the following programming languages:
 
-- Lua
 - Go
+- Lua
 - C
-- Javascript
 
 I additionally have worked with the following programming languages in some way or another:
 
+- Javascript
 - C#
 - C++
 - Python
