@@ -2,3 +2,4 @@
 dist/*
 !dist/README.md
 .DS_STORE
+public/*
