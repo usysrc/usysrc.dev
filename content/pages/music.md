@@ -6,9 +6,11 @@ layout: staticpage
 
 ![music](/img/music.jpg)
 
+I enjoy playing the piano and making computer and electronic music.
+
 # rdlk
 
-kraut and synthesizer dance music
+I made a lot of kraut and synthesizer dance music
 [https://rdlk.xyz](https://rdlk.xyz)
 
 # orcish inn
@@ -17,7 +19,7 @@ I made the [soundtrack](https://headchant.bandcamp.com/releases) for orcish inn 
 
 # shoegaze vst
 
-I couldn't find a plain reverse delay plugin. [https://spelltop.itch.io/shoegaze-vst](https://spelltop.itch.io/shoegaze-vst) So I made one.
+I couldn't find a plain reverse delay vst plugin. [https://spelltop.itch.io/shoegaze-vst](https://spelltop.itch.io/shoegaze-vst) So I made one.
 
 Features:
 
