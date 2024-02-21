@@ -3,7 +3,13 @@ title: "code"
 layout: staticpage
 ---
 
-![code](/img/code.jpg)
+![mesh](/img/mesh.jpg)
+
+# unix philosophy
+
+I enjoy minimalist and modular software following the [unix philosophy](https://en.wikipedia.org/wiki/Unix_philosophy).
+
+I use git, docker, kubernetes.
 
 # programming languages
 
@@ -36,4 +42,4 @@ local otherLanguages = {
 }
 ```
 
-I joined [advent of code](https://github.com/usysrc/aoc) in 2019, 2020, 2021 and 2022.
+I joined [advent of code](https://github.com/usysrc/aoc) in 2019, 2020, 2021, 2022 and 2023.
