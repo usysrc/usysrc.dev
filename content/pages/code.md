@@ -14,6 +14,7 @@ languages := [3]string{
   "Go",
   "Lua",
   "C",
+  "Python",
 }
 ```
 I additionally have worked with the following programming languages in some way or another:
