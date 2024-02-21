@@ -1,12 +1,14 @@
 <div class="logo">
-    <a href="/"><img class="logo" src="/img/logo.svg" /></a>
+  <a href="/"><img class="logo" src="/img/logo.svg" /></a>
 </div>
 <div id="nav-border" class="container">
-    <nav id="nav" class="nav justify-content-center">
-        <p>
-            {{ range where .Site.RegularPages "Section" "pages" }}
-                <a href="{{.Permalink}}">{{.Title}}</a>
-            {{ end }}
-        </p>
-    </nav>
+  <nav id="nav" class="nav justify-content-center">
+    <p>
+      {{ $pages := where .Site.RegularPages "Section" "pages" }}
+      {{ $sortedPages := sort $pages "Title" "asc"}}
+      {{ range $sortedPages }}
+      <a href="{{.Permalink}}">{{.Title}}</a>
+      {{ end }}
+    </p>
+  </nav>
 </div>
