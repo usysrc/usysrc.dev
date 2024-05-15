@@ -26,16 +26,6 @@ nav a {
     margin-right: 1rem;
 }
 
-main {
-    margin-top: 16px;
-}
-
-#titleimage {
-    width: 900px;
-    height: 550px;
-    margin-left: 0;
-}
-
 footer {
     text-align: center;
     border-top: 1px solid;
@@ -50,7 +40,7 @@ footer {
 }
 
 body {
-    max-width: 500px;
+    max-width: 32rem;
     margin: 0 auto;
     padding: 0;
 }
