@@ -5,15 +5,13 @@ layout: staticpage
 
 ![mesh](/img/mesh.jpg)
 
-# unix philosophy
+# philosophy
 
-I enjoy minimalist and modular software following the [unix philosophy](https://en.wikipedia.org/wiki/Unix_philosophy).
-
-I use git, docker, kubernetes.
+I enjoy minimalist and modular software (see [unix philosophy](https://en.wikipedia.org/wiki/Unix_philosophy)).
 
 # programming languages
 
-I currently enjoy using the following programming languages:
+I currently use the following programming languages:
 
 ```go
 languages := [3]string{
@@ -23,6 +21,7 @@ languages := [3]string{
   "Python",
 }
 ```
+
 I additionally have worked with the following programming languages in some way or another:
 
 ```lua
