@@ -41,7 +41,7 @@ body {
     max-width: 32rem;
     margin: 0 auto;
     padding: 0;
-    background-color: #000;
+    background-color: rgb(11, 14, 20);
     color: #fff;
 }
 
@@ -60,4 +60,8 @@ body {
 
 #content ul li {
     list-style-type: none;
+}
+
+code {
+    text-wrap: wrap;
 }
