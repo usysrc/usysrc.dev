@@ -14,7 +14,7 @@ I enjoy minimalist and modular software (see [unix philosophy](https://en.wikipe
 I currently use the following programming languages:
 
 ```go
-languages := [3]string{
+languages := [4]string{
   "Go",
   "Lua",
   "C",
