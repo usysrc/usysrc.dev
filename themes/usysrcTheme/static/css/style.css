@@ -11,8 +11,13 @@
 
 a {
     color: #fff;
+    text-align: center;
 }
 
+a:hover {
+    background-color: #fff;
+    color: #000;
+}
 
 nav {
     text-align: center;
@@ -20,8 +25,8 @@ nav {
 }
 
 nav a {
-    margin-left: 1rem;
-    margin-right: 1rem;
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
 }
 
 footer {
