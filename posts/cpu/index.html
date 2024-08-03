@@ -1,0 +1,138 @@
+<!doctype html><html><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><link rel=stylesheet type=text/css href=/css/style.css><title>usysrc.dev | A CPU in Lua</title></head><body><a href=/><div class=logo><img src=/img/logo.svg></div></a><div id=nav-border class=container><nav id=nav class="nav justify-content-center"><p><a href=https://usysrc.dev/pages/code/>code</a>
+<a href=https://usysrc.dev/pages/games/>interaction</a>
+<a href=https://usysrc.dev/pages/music/>sound</a></p></nav></div><div id=content><h1 id=a-cpu-in-lua>A CPU in Lua</h1><p><em>This post was originally published on blog.headchant.com but was edited and moved here in 2022.</em></p><p>It might be interesting to implement a small register based VM in Lua. Lets start by considering the architecture of a register machine.</p><h2 id=the-nop-machine>The NOP machine</h2><p>If we look at how existing Register Machines are designed for example the or the Lua VM itself, we see a few things:</p><ul><li>some registers</li><li>a program</li><li>something that executes the program</li></ul><p>The last part will be the point of entry for the lua program itself but also decide the core features of the design.
+The memory</p><p>We can reduce most of our design problems by answering the question: how is it stored?</p><p>Most often there is a counter that is being used to fetch the program from memory. This counter is sometimes called the program counter or short PC. In Lua we can represent the memory as a flat table and the PC as a number type.</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-lua data-lang=lua><span style=display:flex><span><span style=color:#8be9fd;font-style:italic>local</span> MEM <span style=color:#ff79c6>=</span> {}
+</span></span><span style=display:flex><span><span style=color:#8be9fd;font-style:italic>local</span> PC <span style=color:#ff79c6>=</span> <span style=color:#bd93f9>0</span>
+</span></span></code></pre></div><h2 id=the-registers>The registers</h2><p>A data registers is a small storage cell defined by it’s name (address), wordlength and content. In the <a href=https://raw.githubusercontent.com/gatesphere/demi-16/master/docs/dcpu-specs/dcpu-1-7.txt>DCPU-16 Spec</a>, for example, there are 8 registers named A,B,C… and correspond to the values 0x00-0x07 with a wordlength of 16bit.</p><p>We use a simple table and init the fields to numbers that represent our registers:</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-lua data-lang=lua><span style=display:flex><span><span style=color:#8be9fd;font-style:italic>local</span> registers <span style=color:#ff79c6>=</span> {
+</span></span><span style=display:flex><span>    A <span style=color:#ff79c6>=</span> <span style=color:#bd93f9>0</span>,
+</span></span><span style=display:flex><span>    B <span style=color:#ff79c6>=</span> <span style=color:#bd93f9>0</span>,
+</span></span><span style=display:flex><span>    C <span style=color:#ff79c6>=</span> <span style=color:#bd93f9>0</span>,
+</span></span><span style=display:flex><span>    D <span style=color:#ff79c6>=</span> <span style=color:#bd93f9>0</span>
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><p>The <code>registers</code> table can be used to access each register by simple dot syntax: <code>register.A</code>.</p><h2 id=opcodes-and-operands>Opcodes and operands</h2><p>Instructions might be represented as byte sequences in the memory and can be a instruction like NOP. It can also be a operand that is only meaningful in conjuction with a opcode like MOV A, c (move constant c into the register A).</p><p>We represent instructions as lua functions in a table where the keys represent the bytecode of the opcode:</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-lua data-lang=lua><span style=display:flex><span><span style=color:#8be9fd;font-style:italic>local</span> opcodes <span style=color:#ff79c6>=</span> {
+</span></span><span style=display:flex><span>    [<span style=color:#f1fa8c>&#34;0x00&#34;</span>] <span style=color:#ff79c6>=</span> <span style=color:#ff79c6>function</span>() <span style=color:#6272a4>-- NOP</span>
+</span></span><span style=display:flex><span>    <span style=color:#ff79c6>end</span>,
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><h2 id=fetch-and-execute>Fetch and Execute</h2><p>We need to establish a cycle to read out the instruction and fetch the opcode.</p><p>First step is easy. We offset our instruction register</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-lua data-lang=lua><span style=display:flex><span>PC <span style=color:#ff79c6>=</span> PC <span style=color:#ff79c6>+</span> <span style=color:#bd93f9>1</span>
+</span></span></code></pre></div><p>Then read out the current instruction at the location of the program counter into our instruction register</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-lua data-lang=lua><span style=display:flex><span><span style=color:#8be9fd;font-style:italic>local</span> IR <span style=color:#ff79c6>=</span> MEM[PC]
+</span></span></code></pre></div><p>Since our opcodes are stored in a table where the opcodes are keys we can easily decode the opcode by addressing the table and then executing it:</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-lua data-lang=lua><span style=display:flex><span>opcodes[IR]()
+</span></span></code></pre></div><p>This whole process can be completed and simplified into a function that uses a while loop that checks if the PC has reached the end of the program memory.</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-lua data-lang=lua><span style=display:flex><span><span style=color:#8be9fd;font-style:italic>local</span> FDX <span style=color:#ff79c6>=</span> <span style=color:#ff79c6>function</span>()
+</span></span><span style=display:flex><span>    <span style=color:#ff79c6>while</span> PC <span style=color:#ff79c6>&lt;</span> <span style=color:#ff79c6>#</span>MEM <span style=color:#ff79c6>do</span>
+</span></span><span style=display:flex><span>        PC <span style=color:#ff79c6>=</span> PC <span style=color:#ff79c6>+</span> <span style=color:#bd93f9>1</span>
+</span></span><span style=display:flex><span>        <span style=color:#8be9fd;font-style:italic>local</span> IR <span style=color:#ff79c6>=</span> MEM[PC]
+</span></span><span style=display:flex><span>        opcodes[IR]()
+</span></span><span style=display:flex><span>    <span style=color:#ff79c6>end</span>
+</span></span><span style=display:flex><span><span style=color:#ff79c6>end</span>
+</span></span></code></pre></div><p>We will add some print statements for better insight in our little cpu:</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-lua data-lang=lua><span style=display:flex><span><span style=color:#8be9fd;font-style:italic>local</span> FDX <span style=color:#ff79c6>=</span> <span style=color:#ff79c6>function</span>()
+</span></span><span style=display:flex><span>    print(<span style=color:#f1fa8c>&#34;PC&#34;</span>, <span style=color:#f1fa8c>&#34;IR&#34;</span>)
+</span></span><span style=display:flex><span>    <span style=color:#ff79c6>while</span> PC <span style=color:#ff79c6>&lt;</span> <span style=color:#ff79c6>#</span>MEM <span style=color:#ff79c6>do</span>
+</span></span><span style=display:flex><span>        PC <span style=color:#ff79c6>=</span> PC <span style=color:#ff79c6>+</span> <span style=color:#bd93f9>1</span>
+</span></span><span style=display:flex><span>        <span style=color:#8be9fd;font-style:italic>local</span> IR <span style=color:#ff79c6>=</span> MEM[PC]
+</span></span><span style=display:flex><span>        opcodes[IR]()
+</span></span><span style=display:flex><span>        print(PC, IR)
+</span></span><span style=display:flex><span>    <span style=color:#ff79c6>end</span>
+</span></span><span style=display:flex><span><span style=color:#ff79c6>end</span>
+</span></span></code></pre></div><p>If you want to test the program you can just fill the memory with a program and execute the FDX function:</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-lua data-lang=lua><span style=display:flex><span><span style=color:#6272a4>-- TEST</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>MEM <span style=color:#ff79c6>=</span> {
+</span></span><span style=display:flex><span>    <span style=color:#f1fa8c>&#34;0x00&#34;</span>,
+</span></span><span style=display:flex><span>    <span style=color:#f1fa8c>&#34;0x00&#34;</span>,
+</span></span><span style=display:flex><span>    <span style=color:#f1fa8c>&#34;0x00&#34;</span>
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>FDX()
+</span></span></code></pre></div><p>This will output something like: PC IR 1 0x00 2 0x00 3 0x00</p><p>Great! Now our machine finally does&mldr; nothing.</p><h2 id=fetch-operands>Fetch operands</h2><p>In order to implement operands we need to introduce a new fetch function into our program:</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-lua data-lang=lua><span style=display:flex><span><span style=color:#8be9fd;font-style:italic>local</span> fetch <span style=color:#ff79c6>=</span> <span style=color:#ff79c6>function</span>()
+</span></span><span style=display:flex><span>    PC <span style=color:#ff79c6>=</span> PC <span style=color:#ff79c6>+</span> <span style=color:#bd93f9>1</span>
+</span></span><span style=display:flex><span>    <span style=color:#ff79c6>return</span> MEM[PC]
+</span></span><span style=display:flex><span><span style=color:#ff79c6>end</span>
+</span></span></code></pre></div><p>We can change the FDX function to use the fetch function and also print out the A register:</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-lua data-lang=lua><span style=display:flex><span><span style=color:#8be9fd;font-style:italic>local</span> FDX <span style=color:#ff79c6>=</span> <span style=color:#ff79c6>function</span>()
+</span></span><span style=display:flex><span>    print(<span style=color:#f1fa8c>&#34;PC&#34;</span>, <span style=color:#f1fa8c>&#34;IR&#34;</span>, <span style=color:#f1fa8c>&#34;A&#34;</span>)
+</span></span><span style=display:flex><span>    <span style=color:#ff79c6>while</span> PC <span style=color:#ff79c6>&lt;</span> <span style=color:#ff79c6>#</span>MEM <span style=color:#ff79c6>do</span>
+</span></span><span style=display:flex><span>        <span style=color:#8be9fd;font-style:italic>local</span> IR <span style=color:#ff79c6>=</span> fetch()
+</span></span><span style=display:flex><span>        opcodes[IR]()
+</span></span><span style=display:flex><span>        print(PC, IR, registers.A)
+</span></span><span style=display:flex><span>    <span style=color:#ff79c6>end</span>
+</span></span><span style=display:flex><span><span style=color:#ff79c6>end</span>
+</span></span></code></pre></div><p>Define it somewhere above the opcodes because we will need to use it to get the operands. But first we need to create a conversion table for the operands to bytecode:</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-lua data-lang=lua><span style=display:flex><span><span style=color:#8be9fd;font-style:italic>local</span> operands <span style=color:#ff79c6>=</span> {
+</span></span><span style=display:flex><span>    [<span style=color:#f1fa8c>&#34;0x00&#34;</span>] <span style=color:#ff79c6>=</span> <span style=color:#f1fa8c>&#34;A&#34;</span>,
+</span></span><span style=display:flex><span>    [<span style=color:#f1fa8c>&#34;0x01&#34;</span>] <span style=color:#ff79c6>=</span> <span style=color:#f1fa8c>&#34;B&#34;</span>,
+</span></span><span style=display:flex><span>    [<span style=color:#f1fa8c>&#34;0x02&#34;</span>] <span style=color:#ff79c6>=</span> <span style=color:#f1fa8c>&#34;C&#34;</span>,
+</span></span><span style=display:flex><span>    [<span style=color:#f1fa8c>&#34;0x03&#34;</span>] <span style=color:#ff79c6>=</span> <span style=color:#f1fa8c>&#34;D&#34;</span>,
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><p>We now add the MOV R, c instruction to the opcodes table:</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-lua data-lang=lua><span style=display:flex><span><span style=color:#8be9fd;font-style:italic>local</span> opcodes <span style=color:#ff79c6>=</span> {
+</span></span><span style=display:flex><span>    [<span style=color:#f1fa8c>&#34;0x00&#34;</span>] <span style=color:#ff79c6>=</span> <span style=color:#ff79c6>function</span>() <span style=color:#6272a4>-- NOP</span>
+</span></span><span style=display:flex><span>    <span style=color:#ff79c6>end</span>,
+</span></span><span style=display:flex><span>    [<span style=color:#f1fa8c>&#34;0x01&#34;</span>] <span style=color:#ff79c6>=</span> <span style=color:#ff79c6>function</span>() <span style=color:#6272a4>-- MOV R, c</span>
+</span></span><span style=display:flex><span>        <span style=color:#8be9fd;font-style:italic>local</span> R <span style=color:#ff79c6>=</span> operands[fetch()]
+</span></span><span style=display:flex><span>        <span style=color:#8be9fd;font-style:italic>local</span> c <span style=color:#ff79c6>=</span> fetch()
+</span></span><span style=display:flex><span>        registers[R] <span style=color:#ff79c6>=</span> tonumber(c)
+</span></span><span style=display:flex><span>    <span style=color:#ff79c6>end</span>
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><p>We change our testprogram to: <code>MEM = { “0x00”, “0x01”, “0x00”, “0x01” “0x00” }</code></p><p>Our output then tells us that our A register is being filled with 1.</p><pre tabindex=0><code>PC  IR      A
+1   0x00    0
+4   0x01    0x01
+5   0x00    0x01
+</code></pre><h2 id=jmp-around>JMP around</h2><p>Just to show how to extend this, I added three more instructions: ADD, SUB, JMP and IFE. JMP sets the program counter to a specific address. IFE adds 3 to the PC if two registers are equal.</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-lua data-lang=lua><span style=display:flex><span><span style=color:#8be9fd;font-style:italic>local</span> opcodes <span style=color:#ff79c6>=</span> {
+</span></span><span style=display:flex><span>    [<span style=color:#f1fa8c>&#34;0x00&#34;</span>] <span style=color:#ff79c6>=</span> <span style=color:#ff79c6>function</span>() <span style=color:#6272a4>-- NOP</span>
+</span></span><span style=display:flex><span>    <span style=color:#ff79c6>end</span>,
+</span></span><span style=display:flex><span>    [<span style=color:#f1fa8c>&#34;0x01&#34;</span>] <span style=color:#ff79c6>=</span> <span style=color:#ff79c6>function</span>() <span style=color:#6272a4>-- MOV R, c</span>
+</span></span><span style=display:flex><span>        <span style=color:#8be9fd;font-style:italic>local</span> A <span style=color:#ff79c6>=</span> operands[fetch()]
+</span></span><span style=display:flex><span>        <span style=color:#8be9fd;font-style:italic>local</span> c <span style=color:#ff79c6>=</span> fetch()
+</span></span><span style=display:flex><span>        registers[A] <span style=color:#ff79c6>=</span> tonumber(c)
+</span></span><span style=display:flex><span>    <span style=color:#ff79c6>end</span>,
+</span></span><span style=display:flex><span>    [<span style=color:#f1fa8c>&#34;0x02&#34;</span>] <span style=color:#ff79c6>=</span> <span style=color:#ff79c6>function</span>() <span style=color:#6272a4>-- ADD R, r</span>
+</span></span><span style=display:flex><span>        <span style=color:#8be9fd;font-style:italic>local</span> R <span style=color:#ff79c6>=</span> operands[fetch()]
+</span></span><span style=display:flex><span>        <span style=color:#8be9fd;font-style:italic>local</span> r <span style=color:#ff79c6>=</span> operands[fetch()]
+</span></span><span style=display:flex><span>        registers[R] <span style=color:#ff79c6>=</span> registers[R] <span style=color:#ff79c6>+</span> registers[r]
+</span></span><span style=display:flex><span>    <span style=color:#ff79c6>end</span>,
+</span></span><span style=display:flex><span>    [<span style=color:#f1fa8c>&#34;0x03&#34;</span>] <span style=color:#ff79c6>=</span> <span style=color:#ff79c6>function</span>() <span style=color:#6272a4>-- SUB R, r</span>
+</span></span><span style=display:flex><span>        <span style=color:#8be9fd;font-style:italic>local</span> R <span style=color:#ff79c6>=</span> operands[fetch()]
+</span></span><span style=display:flex><span>        <span style=color:#8be9fd;font-style:italic>local</span> r <span style=color:#ff79c6>=</span> operands[fetch()]
+</span></span><span style=display:flex><span>        registers[R] <span style=color:#ff79c6>=</span> registers[R] <span style=color:#ff79c6>-</span> registers[r]
+</span></span><span style=display:flex><span>    <span style=color:#ff79c6>end</span>,
+</span></span><span style=display:flex><span>    [<span style=color:#f1fa8c>&#34;0x04&#34;</span>] <span style=color:#ff79c6>=</span> <span style=color:#ff79c6>function</span>() <span style=color:#6272a4>-- JMP addr</span>
+</span></span><span style=display:flex><span>        <span style=color:#8be9fd;font-style:italic>local</span> addr <span style=color:#ff79c6>=</span> fetch()
+</span></span><span style=display:flex><span>        PC <span style=color:#ff79c6>=</span> tonumber(addr)
+</span></span><span style=display:flex><span>    <span style=color:#ff79c6>end</span>,
+</span></span><span style=display:flex><span>    [<span style=color:#f1fa8c>&#34;0x05&#34;</span>] <span style=color:#ff79c6>=</span> <span style=color:#ff79c6>function</span>() <span style=color:#6272a4>-- IFE R, r</span>
+</span></span><span style=display:flex><span>        <span style=color:#8be9fd;font-style:italic>local</span> R <span style=color:#ff79c6>=</span> registers[operands[fetch()]]
+</span></span><span style=display:flex><span>        <span style=color:#8be9fd;font-style:italic>local</span> r <span style=color:#ff79c6>=</span> registers[operands[fetch()]]
+</span></span><span style=display:flex><span>        PC <span style=color:#ff79c6>=</span> (R <span style=color:#ff79c6>==</span> r) <span style=color:#ff79c6>and</span> PC <span style=color:#ff79c6>+</span> <span style=color:#bd93f9>3</span> <span style=color:#ff79c6>or</span> PC
+</span></span><span style=display:flex><span>    <span style=color:#ff79c6>end</span>
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#6272a4>-- TEST machine</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>MEM <span style=color:#ff79c6>=</span> {
+</span></span><span style=display:flex><span>    <span style=color:#f1fa8c>&#34;0x00&#34;</span>, <span style=color:#6272a4>-- NOP</span>
+</span></span><span style=display:flex><span>    <span style=color:#f1fa8c>&#34;0x01&#34;</span>, <span style=color:#f1fa8c>&#34;0x01&#34;</span>, <span style=color:#f1fa8c>&#34;0x05&#34;</span>, <span style=color:#6272a4>-- MOV B, 5</span>
+</span></span><span style=display:flex><span>    <span style=color:#f1fa8c>&#34;0x01&#34;</span>, <span style=color:#f1fa8c>&#34;0x02&#34;</span>, <span style=color:#f1fa8c>&#34;0x01&#34;</span>, <span style=color:#6272a4>-- MOV C, 1</span>
+</span></span><span style=display:flex><span>    <span style=color:#f1fa8c>&#34;0x02&#34;</span>, <span style=color:#f1fa8c>&#34;0x00&#34;</span>, <span style=color:#f1fa8c>&#34;0x02&#34;</span>, <span style=color:#6272a4>-- ADD A, C</span>
+</span></span><span style=display:flex><span>    <span style=color:#f1fa8c>&#34;0x05&#34;</span>, <span style=color:#f1fa8c>&#34;0x00&#34;</span>, <span style=color:#f1fa8c>&#34;0x01&#34;</span>, <span style=color:#6272a4>-- IFE A, B</span>
+</span></span><span style=display:flex><span>    <span style=color:#f1fa8c>&#34;0x04&#34;</span>, <span style=color:#f1fa8c>&#34;0x7&#34;</span>, <span style=color:#6272a4>-- JMP 1</span>
+</span></span><span style=display:flex><span>    <span style=color:#f1fa8c>&#34;0x00&#34;</span>,
+</span></span><span style=display:flex><span>    <span style=color:#f1fa8c>&#34;0x00&#34;</span>
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><p>Now we have a small loop that counts to 5 and then stops! Yeah!</p><pre tabindex=0><code>PC  IR      A   B
+1   0x00    0   0   0
+4   0x01    0   5   0
+7   0x01    0   5   1
+10  0x02    1   5   1
+13  0x05    1   5   1
+7   0x04    1   5   1
+10  0x02    2   5   1
+13  0x05    2   5   1
+7   0x04    2   5   1
+10  0x02    3   5   1
+13  0x05    3   5   1
+7   0x04    3   5   1
+10  0x02    4   5   1
+13  0x05    4   5   1
+7   0x04    4   5   1
+10  0x02    5   5   1
+16  0x05    5   5   1
+17  0x00    5   5   1
+</code></pre><h2 id=conclusion>Conclusion</h2><p>There is still a lot of room for experimentation: Write an assembler. Handle errors, add your own instructions and make small programs with them. Try to enforce the register sizes or maybe create &ldquo;stack and add&rdquo; subroutines. You could also try to create opcodes with different cycle length or implement a small pipeline (and then resolve stalls).</p></div><footer><a href=https://mastodon.social/@headchant rel=me>fediverse</a>
+<a href=https://github.com/usysrc/>github</a>
+<a href=https://spelltop.itch.io>itch</a>
+- 2024 usysrc</footer></body></html>

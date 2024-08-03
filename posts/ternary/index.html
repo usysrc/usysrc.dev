@@ -1,0 +1,14 @@
+<!doctype html><html><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><link rel=stylesheet type=text/css href=/css/style.css><title>usysrc.dev | Lua Ternary Idiom</title></head><body><a href=/><div class=logo><img src=/img/logo.svg></div></a><div id=nav-border class=container><nav id=nav class="nav justify-content-center"><p><a href=https://usysrc.dev/pages/code/>code</a>
+<a href=https://usysrc.dev/pages/games/>interaction</a>
+<a href=https://usysrc.dev/pages/music/>sound</a></p></nav></div><div id=content><h1 id=lua-ternary-idiom>Lua Ternary Idiom</h1><p>You can find ternary operators in other languages in the following form:</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-sh data-lang=sh><span style=display:flex><span><span style=color:#8be9fd;font-style:italic>d</span> <span style=color:#ff79c6>=</span> a ? b : c
+</span></span></code></pre></div><p>Ternary by Precedence. In Lua logical operators and their precedence can be used to achieve the same:</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-lua data-lang=lua><span style=display:flex><span>d <span style=color:#ff79c6>=</span> a <span style=color:#ff79c6>and</span> b <span style=color:#ff79c6>or</span> c
+</span></span></code></pre></div><p>Written out with <code>if</code> it would look like this:</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-lua data-lang=lua><span style=display:flex><span><span style=color:#ff79c6>if</span> a <span style=color:#ff79c6>then</span>
+</span></span><span style=display:flex><span>  d <span style=color:#ff79c6>=</span> b
+</span></span><span style=display:flex><span><span style=color:#ff79c6>else</span>
+</span></span><span style=display:flex><span>  d <span style=color:#ff79c6>=</span> c
+</span></span><span style=display:flex><span><span style=color:#ff79c6>end</span>
+</span></span></code></pre></div><p>If <code>a</code> is <code>true</code> then <code>b</code> will be assigned to <code>d</code>. But if <code>a</code> is <code>false</code> then <code>c</code> will be assigned to <code>d</code>.
+As a basic rule I like to remember that &lsquo;or&rsquo; returns the first value and <code>and</code> returns the second value.</p><p>Note that this can also come in handy for other idioms such as default values. But I would advise against constructing complicated logical return structures this way for the sake of readability.</p></div><footer><a href=https://mastodon.social/@headchant rel=me>fediverse</a>
+<a href=https://github.com/usysrc/>github</a>
+<a href=https://spelltop.itch.io>itch</a>
+- 2024 usysrc</footer></body></html>
