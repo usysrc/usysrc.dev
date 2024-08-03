@@ -4,7 +4,7 @@ date: 2022-07-10T13:41:13+02:00
 layout: staticpage
 ---
 
-![games](/img/game.jpg)
+![games](images/game.jpg)
 
 # spelltop
 

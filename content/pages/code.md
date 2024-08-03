@@ -3,7 +3,7 @@ title: "code"
 layout: staticpage
 ---
 
-![mesh](/img/mesh.jpg)
+![mesh](/images/mesh.jpg)
 
 # philosophy
 
