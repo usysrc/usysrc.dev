@@ -6,7 +6,7 @@ draft: false
 
 # Tables in Pico8
 
-![tables](/images/tables.png)
+![tables](../tables.png)
 
 ## The Concatenation Trick
 
@@ -38,7 +38,7 @@ end
 
 ## Objects And Container
 
-![](/images/invaders.gif)
+![invaders](../invaders.gif)
 
 Entities like the spaceship in this gif are objects. Containers for objects are special in Pico-8 because we have a couple of built-in functions to help us manage insertion and deletion. I strongly suggest to use add(), del() and all() for container and entity management.
 
