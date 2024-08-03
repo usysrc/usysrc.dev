@@ -4,7 +4,7 @@ date: 2022-07-10T13:40:56+02:00
 layout: staticpage
 ---
 
-![music](images/music.jpg)
+{{< figure alt="music" src="images/music.jpg" >}}
 
 I enjoy playing the piano and making computer and electronic music.
 
