@@ -1,5 +1,7 @@
-on: [push]
-name: prod-deploy
+name: Deploy to Production
+on:
+  push:
+    branches: [main]
 jobs:
   prod-deploy:
     name: prod-deploy

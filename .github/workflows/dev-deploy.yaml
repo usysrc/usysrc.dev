@@ -3,7 +3,8 @@ on:
   push:
     branches: [dev]
 jobs:
-  build-and-deploy:
+  dev-deploy:
+    name: dev-deploy
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
