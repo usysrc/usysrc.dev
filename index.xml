@@ -5,7 +5,7 @@ if a then d = b else d = c end If a is true then b will be assigned to d.</descr
 How to require a file Sadly lua require does not work the way as expected in TIC-80. We need to add the package path.
 package.path = package.path .. &amp;#34;;/Users/youruser/Library/Application Support/com.nesbox.tic/TIC-80/?.lua&amp;#34; require &amp;#34;game&amp;#34;</description></item><item><title>interaction</title><link>https://usysrc.github.io/usysrc.dev/pages/games/</link><pubDate>Sun, 10 Jul 2022 13:41:13 +0200</pubDate><guid>https://usysrc.github.io/usysrc.dev/pages/games/</guid><description>spelltop spelltop was created in 2021 and now my main banner for games.
 some projects can be found on spelltop.itch.io
-game development I love small game engines and frameworks like tic80, pico8 and love2d.
+game development I love small game engines and frameworks like tic80, pico8, picotron and love2d.
 ludum dare I completed a couple of small games in ludum dare.
 past aliases I made games under the name: headchant</description></item><item><title>sound</title><link>https://usysrc.github.io/usysrc.dev/pages/music/</link><pubDate>Sun, 10 Jul 2022 13:40:56 +0200</pubDate><guid>https://usysrc.github.io/usysrc.dev/pages/music/</guid><description>
 I enjoy playing the piano and making computer and electronic music.
