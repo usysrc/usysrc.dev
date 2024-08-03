@@ -4,7 +4,7 @@ date: 2022-07-10T13:41:13+02:00
 layout: staticpage
 ---
 
-![games](/img/game.jpg)
+{{< figure alt="game" src="images/game.jpg" >}}
 
 # spelltop
 
@@ -14,7 +14,7 @@ some projects can be found on [spelltop.itch.io](https://spelltop.itch.io)
 
 # game development
 
-I love small game engines and frameworks like tic80, pico8 and love2d.
+I love small game engines and frameworks like tic80, pico8, picotron and love2d.
 
 # ludum dare
 

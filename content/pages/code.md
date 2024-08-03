@@ -3,7 +3,7 @@ title: "code"
 layout: staticpage
 ---
 
-![mesh](/img/mesh.jpg)
+{{< figure alt="mesh" src="images/mesh.jpg" >}}
 
 # philosophy
 

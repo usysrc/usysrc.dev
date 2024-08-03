@@ -37,7 +37,12 @@ footer {
     margin-bottom: 1rem;
 }
 
-#content p img {
+#content figure {
+    display: block; 
+    margin: 0;
+}
+
+#content figure img {
     display: block;
     max-width: 32rem;
 }
