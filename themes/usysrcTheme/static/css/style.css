@@ -42,7 +42,7 @@ footer {
     margin: 0;
 }
 
-#content img {
+#content figure img {
     display: block;
     max-width: 32rem;
 }
