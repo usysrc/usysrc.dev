@@ -1,8 +1,8 @@
 on: [push]
-name: deploy
+name: prod-deploy
 jobs:
-  deploy:
-    name: deploy
+  prod-deploy:
+    name: prod-deploy
     runs-on: ubuntu-latest
     steps:
       - name: get latest
