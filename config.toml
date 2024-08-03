@@ -3,6 +3,7 @@ languageCode = 'en-us'
 title = 'usysrc.dev'
 theme = 'usysrcTheme'
 assetDir = "static"
+
 [menu]
   [[menu.main]]
     name = "code"
@@ -16,7 +17,6 @@ assetDir = "static"
     name = "games"
     url = "/pages/games/"
     weight = 3 
-
 
 [markup]
   [markup.highlight]
