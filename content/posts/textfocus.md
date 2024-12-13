@@ -2,11 +2,10 @@
 title: "Text Focus for Obsidian"
 date: 2024-12-13T20:32:34+02:00
 ---
-
 # Text Focus Plugin for Obsidian
 
 ## My Notes Workflow 
-I work *fast*. 
+I work *fast*. Well, at least I like to think that I work fast.
 
 I want to be able to open [Obsidian](https://obsidian.md/) and throw whatever is in my clipboard in there as fast as possible.
 
