@@ -4,11 +4,11 @@
     "type": "split",
     "children": [
       {
-        "id": "ef796a39e319ab5f",
+        "id": "bd2a0b41adce3da5",
         "type": "tabs",
         "children": [
           {
-            "id": "58c109ca87b6c7fd",
+            "id": "eefc7b7a04f9b679",
             "type": "leaf",
             "state": {
               "type": "markdown",
@@ -146,7 +146,7 @@
             }
           },
           {
-            "id": "61acd4e0d731d83c",
+            "id": "e7cdfd52f925cc6d",
             "type": "leaf",
             "state": {
               "type": "git-view",
@@ -173,15 +173,17 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "58c109ca87b6c7fd",
+  "active": "eefc7b7a04f9b679",
   "lastOpenFiles": [
-    "posts/tic.md",
+    "sd.md",
     "posts/textfocus.md",
+    "Untitled.md",
     "posts/test.md",
-    "posts/ternary.md",
     "posts/tables.md",
+    "posts/cpu.md",
+    "posts/tic.md",
+    "posts/ternary.md",
     "posts/tables.png",
-    "posts/invaders.gif",
-    "posts/cpu.md"
+    "posts/invaders.gif"
   ]
 }
