@@ -4,11 +4,11 @@
     "type": "split",
     "children": [
       {
-        "id": "bd2a0b41adce3da5",
+        "id": "014b796d07e9542a",
         "type": "tabs",
         "children": [
           {
-            "id": "eefc7b7a04f9b679",
+            "id": "f8d383545fe5e34b",
             "type": "leaf",
             "state": {
               "type": "markdown",
@@ -93,7 +93,6 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "posts/textfocus.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -103,7 +102,7 @@
                 "unlinkedCollapsed": true
               },
               "icon": "links-coming-in",
-              "title": "Backlinks for textfocus"
+              "title": "Backlinks"
             }
           },
           {
@@ -112,12 +111,11 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "posts/textfocus.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               },
               "icon": "links-going-out",
-              "title": "Outgoing links from textfocus"
+              "title": "Outgoing links"
             }
           },
           {
@@ -138,11 +136,9 @@
             "type": "leaf",
             "state": {
               "type": "outline",
-              "state": {
-                "file": "posts/textfocus.md"
-              },
+              "state": {},
               "icon": "lucide-list",
-              "title": "Outline of textfocus"
+              "title": "Outline"
             }
           },
           {
@@ -160,7 +156,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 300
+    "width": 298.5
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -173,14 +169,19 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "eefc7b7a04f9b679",
+  "active": "e7cdfd52f925cc6d",
   "lastOpenFiles": [
-    "Untitled.md",
+    "posts/blog-api.md",
+    "posts/cpu.md",
     "posts/textfocus.md",
+    "pages/code.md",
+    "pages/games.md",
+    "pages/music.md",
+    "pages/music.jpg",
+    "pages/mesh.jpg",
     "sd.md",
     "posts/test.md",
     "posts/tables.md",
-    "posts/cpu.md",
     "posts/tic.md",
     "posts/ternary.md",
     "posts/tables.png",
